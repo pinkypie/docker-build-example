@@ -1,4 +1,4 @@
-bmcgehee/example-node-docker:
+bmcgehee/docker-build-example:
 
   Build:
     #- echo "docker login -u $DISTELLI_DOCKER_USERNAME -p $DISTELLI_DOCKER_PW -e $DISTELLI_DOCKER_EMAIL $DISTELLI_DOCKER_ENDPOINT"
