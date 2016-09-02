@@ -12,8 +12,7 @@ RUN set -x \
     && gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
     && rm -r "$GNUPGHOME" /usr/local/bin/gosu.asc \
     && chmod +x /usr/local/bin/gosu \
-    && gosu nobody true \
-    && apt-get purge -y --auto-remove ca-certificates wget
+    && gosu nobody true 
 RUN curl -sSL https://www.distelli.com/download/client | sh
 RUN curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash - \
     && sudo apt-get -y update \
