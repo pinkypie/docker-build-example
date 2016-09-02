@@ -16,7 +16,7 @@ RUN set -x \
     && apt-get purge -y --auto-remove ca-certificates wget
 RUN curl -sSL https://www.distelli.com/download/client | sh
 RUN curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash - \
-    && sudo apt-get -y update
+    && sudo apt-get -y update \
     && sudo apt-get -y install nodejs \
     && npm install npm -g \
     && sudo apt-get -y install build-essential
