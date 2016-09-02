@@ -18,6 +18,7 @@ RUN curl -sSL https://www.distelli.com/download/client | sh
 RUN curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash - \
     && sudo apt-get -y update \
     && sudo apt-get -y install nodejs \
+    && sudo apt-get -y install npm \
     && npm install npm -g \
     && sudo apt-get -y install build-essential
 CMD ["/bin/sh"]
