@@ -1,6 +1,6 @@
 FROM ubuntu:14.04
 RUN apt-get update -y
-RUN sudo apt-get -y install curl
+RUN sudo apt-get -y install curl ca-certificates
 ENV GOSU_VERSION 1.9
 RUN set -x \
     && apt-get install -y --no-install-recommends ca-certificates wget && rm -rf /var/lib/apt/lists/* \
@@ -19,6 +19,6 @@ RUN curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash - \
     && sudo apt-get -y update \
     && sudo apt-get -y install nodejs \
     && sudo apt-get -y install npm \
-    && npm install npm -g \
+    && sudo npm install npm -g \
     && sudo apt-get -y install build-essential
 CMD ["/bin/sh"]
