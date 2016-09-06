@@ -4,7 +4,7 @@ RUN apt-get update -y \
     && sudo apt-get -y install libssl-dev \
     && sudo apt-get -y install curl ca-certificates \
     && curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
-    
+
 ENV GOSU_VERSION 1.9
 RUN set -x \
     && apt-get install -y --no-install-recommends ca-certificates wget && rm -rf /var/lib/apt/lists/* \
@@ -19,5 +19,7 @@ RUN set -x \
     && gosu nobody true
      
 RUN curl -sSL https://www.distelli.com/download/client | sh
-    
+
+RUN sudo sh -c "echo 'Brian was here!' >> /testfile.txt"
+
 CMD ["/bin/sh"]
