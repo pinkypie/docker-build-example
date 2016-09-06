@@ -14,9 +14,10 @@ RUN set -x \
     && chmod +x /usr/local/bin/gosu \
     && gosu nobody true 
 RUN curl -sSL https://www.distelli.com/download/client | sh
-RUN curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash - \
+RUN curl -sL https://deb.nodesource.com/setup | sudo -E bash - \
     && sudo apt-get -y update \
     && sudo apt-get -y install nodejs \
+    && sudo ln -s /usr/bin/nodejs /usr/bin/node \
     && sudo apt-get -y install npm \
     && sudo npm install npm -g \
     && sudo apt-get -y install build-essential
