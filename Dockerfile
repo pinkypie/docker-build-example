@@ -1,5 +1,10 @@
 FROM ubuntu:14.04
 
+# Create Distelli user and install everything as that user
+RUN useradd -ms /bin/bash distelli
+USER distelli
+WORKDIR /home/distelli
+
 # Install prerequisites
 RUN apt-get update -y \
     && sudo apt-get -y install build-essential checkinstall \
@@ -15,9 +20,7 @@ RUN curl -sSL https://www.distelli.com/download/client | sh \
     && sudo /usr/local/bin/distelli agent install
 
 # Install node version manager
-RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash \
-    && sudo mv ~/.nvm /home/distelli/ \
-    && sudo chown -R distelli:distelli /home/distelli/.nvm
+RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash 
 
 # Install docker
 #RUN sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D \
