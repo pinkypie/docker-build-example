@@ -53,4 +53,8 @@ RUN sudo sh -c "echo 'Brian was here!' >> /testfile.txt"
 
 RUN whoami
 
+USER root
+
+RUN whoami
+
 CMD ["/bin/bash"]
