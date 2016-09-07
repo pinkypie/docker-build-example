@@ -6,7 +6,7 @@ USER distelli
 WORKDIR /home/distelli
 
 # Install prerequisites
-RUN apt-get update -y \
+RUN sudo apt-get update -y \
     && sudo apt-get -y install build-essential checkinstall \
     && sudo apt-get -y install libssl-dev openssh-client openssh-server \
     && sudo apt-get -y install curl apt-transport-https ca-certificates
