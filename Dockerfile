@@ -46,7 +46,8 @@ ENV GOSU_VERSION 1.9
 #    && chmod +x /usr/local/bin/gosu \
 #    && gosu nobody true
 
-RUN curl -o /bin/gosu -sSL "https://github.com/tianon/gosu/releases/download/1.9/gosu-$(dpkg --print-architecture)" && chmod +x /bin/gosu
+RUN sudo curl -o /bin/gosu -sSL "https://github.com/tianon/gosu/releases/download/1.9/gosu-$(dpkg --print-architecture)" \
+     && sudo chmod +x /bin/gosu
      
 RUN sudo sh -c "echo 'Brian was here!' >> /testfile.txt"
 
