@@ -1,7 +1,10 @@
 FROM ubuntu:14.04
 
 # Create Distelli user and install everything as that user
-RUN useradd -ms /bin/bash distelli
+RUN useradd -ms /bin/bash distelli \
+    && sudo sh -c "echo 'distelli ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/distelli" \
+    && sudo sh -c "echo 'Defaults:distelli !requiretty' >> /etc/sudoers.d/distelli
+    
 USER distelli
 WORKDIR /home/distelli
 
