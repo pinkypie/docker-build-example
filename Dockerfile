@@ -3,11 +3,16 @@ FROM ubuntu:14.04
 # Install prerequisites
 RUN apt-get update -y \
     && sudo apt-get -y install build-essential checkinstall \
-    && sudo apt-get -y install libssl-dev openssh \
+    && sudo apt-get -y install libssl-dev openssh-client openssh-server \
     && sudo apt-get -y install curl apt-transport-https ca-certificates
 
 # Update the .ssh/known_hosts file:
 RUN ssh-keyscan -H github.com bitbucket.org >> /etc/ssh/ssh_known_hosts
+
+# Install Distelli CLI and Agent
+# Installing agent to create distelli account
+RUN curl -sSL https://www.distelli.com/download/client | sh \
+    && sudo /usr/local/bin/distelli agent install
 
 # Install node version manager
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash \
@@ -38,8 +43,6 @@ ENV GOSU_VERSION 1.9
 
 RUN curl -o /bin/gosu -sSL "https://github.com/tianon/gosu/releases/download/1.9/gosu-$(dpkg --print-architecture)" && chmod +x /bin/gosu
      
-RUN curl -sSL https://www.distelli.com/download/client | sh
-
 RUN sudo sh -c "echo 'Brian was here!' >> /testfile.txt"
 
 RUN whoami
