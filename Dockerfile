@@ -3,7 +3,7 @@ FROM ubuntu:14.04
 # Install prerequisites
 RUN apt-get update -y \
     && sudo apt-get -y install build-essential checkinstall \
-    && sudo apt-get -y install libssl-dev \
+    && sudo apt-get -y install libssl-dev openssh \
     && sudo apt-get -y install curl apt-transport-https ca-certificates
 
 # Update the .ssh/known_hosts file:
