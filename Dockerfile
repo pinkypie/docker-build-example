@@ -15,12 +15,11 @@ RUN sudo apt-get update -y \
     && sudo apt-get -y install curl apt-transport-https ca-certificates
 
 # Update the .ssh/known_hosts file:
-RUN ssh-keyscan -H github.com bitbucket.org >> /etc/ssh/ssh_known_hosts
+RUN sudo sh -c "ssh-keyscan -H github.com bitbucket.org >> /etc/ssh/ssh_known_hosts"
 
 # Install Distelli CLI and Agent
 # Installing agent to create distelli account
-RUN curl -sSL https://www.distelli.com/download/client | sh \
-    && sudo /usr/local/bin/distelli agent install
+RUN curl -sSL https://www.distelli.com/download/client | sh 
 
 # Install node version manager
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash 
