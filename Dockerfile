@@ -1,13 +1,17 @@
+# Ubuntu has the necessary framework to start from
 FROM ubuntu:14.04
 
+# Run as root
 USER root
 
 # Create Distelli user
 RUN useradd -ms /bin/bash distelli 
 
+# Set /home/distelli as the working directory
 WORKDIR /home/distelli
     
-# Install prerequisites
+# Install prerequisites. This provides me with the essential tools for building with.
+# Note. You don't need git or mercurial.
 RUN sudo apt-get update -y \
     && sudo apt-get -y install build-essential checkinstall git mercurial \
     && sudo apt-get -y install libssl-dev openssh-client openssh-server \
@@ -16,16 +20,11 @@ RUN sudo apt-get update -y \
 # Update the .ssh/known_hosts file:
 RUN sudo sh -c "ssh-keyscan -H github.com bitbucket.org >> /etc/ssh/ssh_known_hosts"
 
-# Install Distelli CLI and Agent
-# Installing agent to create distelli account
+# Install Distelli CLI to coordinate the build in the container
 RUN curl -sSL https://www.distelli.com/download/client | sh 
 
-# Install node version manager as distelli user
-USER distelli
-RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash 
-USER root
-
 # Install docker
+# Note. This is only necessary if you plan on building docker images
 RUN sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D \
     && sudo sh -c "echo 'deb https://apt.dockerproject.org/repo ubuntu-trusty main' > /etc/apt/sources.list.d/docker.list" \
     && sudo apt-get update -y \
@@ -35,13 +34,22 @@ RUN sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-key
     && sudo chmod +x /usr/local/bin/docker-compose \
     && sudo docker -v
 
+# Setup a volume for writing docker layers/images
+VOLUME /var/lib/docker
+
 # Install gosu
 ENV GOSU_VERSION 1.9
 RUN sudo curl -o /bin/gosu -sSL "https://github.com/tianon/gosu/releases/download/1.9/gosu-$(dpkg --print-architecture)" \
      && sudo chmod +x /bin/gosu
-     
-VOLUME /var/lib/docker
 
+# Install node version manager as distelli user
+USER distelli
+RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash 
+
+# Ensure the final USER statement is "USER root"
+USER root
+
+# An informative file I like to put on my shared images
 RUN sudo sh -c "echo 'Distelli Build Image maintained by Brian McGehee bmcgehee@distelli.com' >> /distelli_build_image.info"
 
 CMD ["/bin/bash"]
