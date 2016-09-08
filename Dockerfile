@@ -42,7 +42,7 @@ RUN sudo curl -o /bin/gosu -sSL "https://github.com/tianon/gosu/releases/downloa
 RUN sudo sh -c "echo 'Brian was here!' >> /testfile.txt"
 
 ADD ./wrapdocker.sh /usr/local/bin/wrapdocker.sh
-RUN chmod +x /usr/local/bin/wrapdocker
+RUN chmod +x /usr/local/bin/wrapdocker.sh
 
 VOLUME /var/lib/docker
 
