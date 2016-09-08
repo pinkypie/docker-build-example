@@ -32,7 +32,7 @@ RUN sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-key
     && sudo apt-get purge -y lxc-docker \
     && sudo apt-get -y install docker-engine \
     && sudo sh -c 'curl -L https://github.com/docker/compose/releases/download/1.6.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose' \
-    && sudo chmod +x /usr/local/bin/docker-compose
+    && sudo chmod +x /usr/local/bin/docker-compose \
     && sudo docker -v
 
 # See https://github.com/docker-library/docker/blob/master/1.12/Dockerfile
