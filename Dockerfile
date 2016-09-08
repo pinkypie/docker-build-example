@@ -1,11 +1,12 @@
 FROM ubuntu:14.04
 
 WORKDIR /home/distelli
+USER root
 
 # Create Distelli user and install everything as that user
-RUN useradd -ms /bin/bash distelli \
-    && sudo sh -c "echo 'distelli ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/distelli" \
-    && sudo sh -c "echo 'Defaults:distelli !requiretty' >> /etc/sudoers.d/distelli"
+RUN useradd -ms /bin/bash distelli 
+#    && sudo sh -c "echo 'distelli ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/distelli" \
+#    && sudo sh -c "echo 'Defaults:distelli !requiretty' >> /etc/sudoers.d/distelli"
     
 # Install prerequisites
 RUN sudo apt-get update -y \
@@ -39,11 +40,11 @@ ENV GOSU_VERSION 1.9
 RUN sudo curl -o /bin/gosu -sSL "https://github.com/tianon/gosu/releases/download/1.9/gosu-$(dpkg --print-architecture)" \
      && sudo chmod +x /bin/gosu
      
-RUN sudo sh -c "echo 'Brian was here!' >> /testfile.txt"
-
 ADD ./wrapdocker.sh /usr/local/bin/wrapdocker.sh
 RUN chmod +x /usr/local/bin/wrapdocker.sh
 
 VOLUME /var/lib/docker
+
+RUN sudo sh -c "echo 'Brian was here!' >> /testfile.txt"
 
 CMD ["/usr/local/bin/wrapdocker.sh"]
