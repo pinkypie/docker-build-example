@@ -48,11 +48,12 @@ ENV GOSU_VERSION 1.9
 RUN sudo curl -o /bin/gosu -sSL "https://github.com/tianon/gosu/releases/download/1.9/gosu-$(dpkg --print-architecture)" \
      && sudo chmod +x /bin/gosu
      
-ADD ./wrapdocker.sh /usr/local/bin/wrapdocker.sh
-RUN chmod +x /usr/local/bin/wrapdocker.sh
+#ADD ./wrapdocker.sh /usr/local/bin/wrapdocker.sh
+#RUN chmod +x /usr/local/bin/wrapdocker.sh
 
 VOLUME /var/lib/docker
 
 RUN sudo sh -c "echo 'Distelli Build Image maintained by Brian McGehee bmcgehee@distelli.com' >> /distelli_build_image.info"
 
-CMD ["/usr/local/bin/wrapdocker.sh"]
+#CMD ["/usr/local/bin/wrapdocker.sh"]
+CMD ["/bin/bash"]
