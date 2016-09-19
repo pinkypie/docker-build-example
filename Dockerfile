@@ -1,4 +1,4 @@
-# Ubuntu has the necessary framework to start from  
+# Ubuntu has the necessary framework to start from   
 FROM ubuntu:14.04
 
 # Run as root
