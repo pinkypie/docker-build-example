@@ -21,7 +21,7 @@ RUN sudo apt-get update -y \
 RUN sudo sh -c "ssh-keyscan -H github.com bitbucket.org >> /etc/ssh/ssh_known_hosts"
 
 # Install Distelli CLI to coordinate the build in the container
-RUN curl -sSL https://www.distelli.com/download/client | sh 
+RUN curl -sSL http://www-onprem.distelli.org/download/client | sh 
 
 # Install docker
 # Note. This is only necessary if you plan on building docker images
