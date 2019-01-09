@@ -35,6 +35,7 @@ RUN v=8 \
     && npm install -g npm@latest
 
 RUN sudo apt-get -y install default-jdk \
+    && sudo apt-get -y install wget \
     && wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein \
     && chmod +x lein \
     && sudo mv lein /usr/local/bin 
