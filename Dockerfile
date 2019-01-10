@@ -9,7 +9,16 @@ RUN useradd -ms /bin/bash distelli
 
 # Set /home/distelli as the working directory
 WORKDIR /home/distelli
-    
+
+# ENV gcloud_key $GCLOUD_KEY
+
+# ARG DISTELLI_BUILDNUM
+# LABEL buildnumber=$DISTELLI_BUILDNUM
+
+# RUN echo $gcloud_key | base64 --decode > /home/distelli/project-key.json
+
+RUN apt-get -y install sudo
+
 # Install prerequisites. This provides me with the essential tools for building with.
 # Note. You don't need git or mercurial.
 RUN sudo apt-get update -y \
