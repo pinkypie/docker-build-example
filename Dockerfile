@@ -25,6 +25,7 @@ RUN sudo apt-get update -y \
     && sudo apt-get -y install make \
     && sudo apt-get -y install curl apt-transport-https ca-certificates software-properties-common
 
+RUN sudo apt-get remove --purge docker docker-engine docker.io
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 RUN sudo add-apt-repository -y \
     "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
