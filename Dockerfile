@@ -70,17 +70,18 @@ RUN sudo apt-get -y install default-jdk \
 # Setup a volume for writing docker layers/images
 VOLUME /var/lib/docker
 
+RUN v=8 \
+    && curl -sL https://deb.nodesource.com/setup_$v.x | sudo -E bash - \
+    && sudo apt-get install -y nodejs \
+    && npm install -g npm@latest
+
 # # Install gosu
 ENV GOSU_VERSION 1.9
 RUN sudo curl -o /bin/gosu -sSL "https://github.com/tianon/gosu/releases/download/1.9/gosu-$(dpkg --print-architecture)" \
       && sudo chmod +x /bin/gosu
 
 # # Install node version manager as distelli user
-USER distelli
-RUN v=8 \
-    && curl -sL https://deb.nodesource.com/setup_$v.x | sudo -E bash - \
-    && sudo apt-get install -y nodejs \
-    && npm install -g npm@latest
+#USER distelli
 # RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash 
 
 # Ensure the final USER statement is "USER root"
