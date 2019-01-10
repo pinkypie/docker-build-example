@@ -35,7 +35,7 @@ RUN sudo apt-get -y update \
     && sudo apt-get -y install docker-ce \
     && sudo apt-get -y install xdg-utils
 
-RUN sudo docker -v
+RUN sudo docker version
 
 RUN sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose \
     && sudo chmod +x /usr/local/bin/docker-compose
