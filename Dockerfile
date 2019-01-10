@@ -74,9 +74,9 @@ RUN curl -sSL https://www.distelli.com/download/client | sh
 VOLUME /var/lib/docker
 
 # # Install gosu
-# ENV GOSU_VERSION 1.9
-# RUN sudo curl -o /bin/gosu -sSL "https://github.com/tianon/gosu/releases/download/1.9/gosu-$(dpkg --print-architecture)" \
-#      && sudo chmod +x /bin/gosu
+ENV GOSU_VERSION 1.9
+RUN sudo curl -o /bin/gosu -sSL "https://github.com/tianon/gosu/releases/download/1.9/gosu-$(dpkg --print-architecture)" \
+      && sudo chmod +x /bin/gosu
 
 # # Install node version manager as distelli user
 # USER distelli
