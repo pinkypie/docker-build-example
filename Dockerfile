@@ -47,10 +47,7 @@ RUN curl -sSL https://www.distelli.com/download/client | sh
 # RUN sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose \
 #     && sudo chmod +x /usr/local/bin/docker-compose
 
-RUN v=8 \
-    && curl -sL https://deb.nodesource.com/setup_$v.x | sudo -E bash - \
-    && sudo apt-get install -y nodejs \
-    && npm install -g npm@latest
+
 
 RUN sudo apt-get -y install default-jdk \
     && sudo apt-get -y install wget \
@@ -79,7 +76,11 @@ RUN sudo curl -o /bin/gosu -sSL "https://github.com/tianon/gosu/releases/downloa
       && sudo chmod +x /bin/gosu
 
 # # Install node version manager as distelli user
-# USER distelli
+USER distelli
+RUN v=8 \
+    && curl -sL https://deb.nodesource.com/setup_$v.x | sudo -E bash - \
+    && sudo apt-get install -y nodejs \
+    && npm install -g npm@latest
 # RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash 
 
 # Ensure the final USER statement is "USER root"
