@@ -17,7 +17,7 @@ WORKDIR /home/distelli
 
 # RUN echo $gcloud_key | base64 --decode > /home/distelli/project-key.json
 
-RUN apt-get -y install sudo
+RUN apt-get update -y && apt-get install -y sudo
 
 # Install prerequisites. This provides me with the essential tools for building with.
 # Note. You don't need git or mercurial.
