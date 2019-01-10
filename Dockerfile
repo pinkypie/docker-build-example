@@ -1,5 +1,5 @@
 # Ubuntu has the necessary framework to start from    
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
 # Run as root
 USER root
