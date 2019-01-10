@@ -34,19 +34,18 @@ RUN sudo sh -c "ssh-keyscan -H github.com bitbucket.org >> /etc/ssh/ssh_known_ho
 RUN curl -sSL https://www.distelli.com/download/client | sh 
 
 # RUN sudo apt-get remove --purge docker docker-engine docker.io
-# RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-# RUN sudo add-apt-repository -y \
-#     "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-#     $(lsb_release -cs) \
-#     stable"
+ RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+ RUN sudo add-apt-repository -y \
+     "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+     $(lsb_release -cs) \
+     stable"
 
-# RUN sudo apt-get -y update \
-#     && sudo apt-get -y install docker-ce \
-#     && sudo apt-get -y install xdg-utils
+ RUN sudo apt-get -y update \
+     && sudo apt-get -y install docker-ce \
+     && sudo apt-get -y install xdg-utils
 
-# RUN sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose \
-#     && sudo chmod +x /usr/local/bin/docker-compose
-
+ RUN sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose \
+     && sudo chmod +x /usr/local/bin/docker-compose
 
 
 RUN sudo apt-get -y install default-jdk \
@@ -56,16 +55,17 @@ RUN sudo apt-get -y install default-jdk \
     && sudo mv lein /usr/local/bin 
 
 
-#Install docker
-#Note. This is only necessary if you plan on building docker images
-RUN sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D \
-    && sudo sh -c "echo 'deb https://apt.dockerproject.org/repo ubuntu-trusty main' > /etc/apt/sources.list.d/docker.list" \
-    && sudo apt-get update -y \
-    && sudo apt-get purge -y lxc-docker \
-    && sudo apt-get -y install docker-engine \
-    && sudo sh -c 'curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose' \
-    && sudo chmod +x /usr/local/bin/docker-compose \
-    && sudo docker -v
+# #Install docker
+# #Note. This is only necessary if you plan on building docker images
+# RUN sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D \
+#     && sudo sh -c "echo 'deb https://apt.dockerproject.org/repo ubuntu-trusty main' > /etc/apt/sources.list.d/docker.list" \
+#     && sudo apt-get update -y \
+#     && sudo apt-get purge -y lxc-docker \
+#     && sudo apt-get -y install docker-ce \
+#     && sudo apt-get -y install xdg-utils \
+#     && sudo sh -c 'curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose' \
+#     && sudo chmod +x /usr/local/bin/docker-compose \
+#     && sudo docker -v
 
 # Setup a volume for writing docker layers/images
 VOLUME /var/lib/docker
@@ -87,6 +87,6 @@ RUN v=8 \
 USER root
 
 # An informative file I like to put on my shared images
-RUN sudo sh -c "echo 'Distelli Build Image maintained by Brian McGehee bmcgehee@distelli.com' >> /distelli_build_image.info"
+RUN sudo sh -c "echo 'Distelli Build Image maintained by Sarah Thompson sarah@puppet.com' >> /distelli_build_image.info"
 
 CMD ["/bin/bash"]
