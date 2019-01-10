@@ -31,6 +31,8 @@ RUN sudo add-apt-repository -y \
     $(lsb_release -cs) \
     stable"
 
+RUN sudo docker -v
+
 RUN sudo apt-get -y update \
     && sudo apt-get -y install docker-ce \
     && sudo apt-get -y install xdg-utils
