@@ -82,7 +82,9 @@ RUN sudo curl -o /bin/gosu -sSL "https://github.com/tianon/gosu/releases/downloa
 
 # # Install node version manager as distelli user
 #USER distelli
-# RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash 
+# RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
+
+RUN sudo gpasswd -a distelli docker
 
 # Ensure the final USER statement is "USER root"
 USER root
